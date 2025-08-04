@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dostoyevsky</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                animation: {
+                    'swipe-in': 'swipe-in 0.8s cubic-bezier(0.4, 0, 0.2, 1) both',
+                    'swipe-out': 'swipe-out 0.8s cubic-bezier(0.4, 0, 0.2, 1) both',
+                    'profile-pulse': 'profile-pulse 2s infinite',
+                },
+                keyframes: {
+                    'swipe-in': {
+                        '0%': { opacity: '0', transform: 'translateX(50px)' },
+                        '100%': { opacity: '1', transform: 'translateX(0)' },
+                    },
+                    'swipe-out': {
+                        '0%': { opacity: '1', transform: 'translateX(0)' },
+                        '100%': { opacity: '0', transform: 'translateX(50px)' },
+                    },
+                    'profile-pulse': {
+                        '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(139, 92, 246, 0.7)' },
+                        '50%': { transform: 'scale(1.08)', boxShadow: '0 0 20px 10px rgba(139, 92, 246, 0.3)' },
+                    },
+                },
+            }
+        }
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const animatedEls = document.querySelectorAll('.animate-swipe-in');
+        animatedEls.forEach(el => {
+            el.classList.remove('animate-swipe-in');
+            el.classList.add('animate-swipe-out');
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('animate-swipe-out');
+                    entry.target.classList.add('animate-swipe-in');
+                } else {
+                    entry.target.classList.remove('animate-swipe-in');
+                    entry.target.classList.add('animate-swipe-out');
+                }
+            });
+        });
+
+        animatedEls.forEach(el => observer.observe(el));
+
+        const closeBtn = document.getElementById('close-banner');
+        const bannerKanan = document.getElementById('banner-kanan');
+        if (closeBtn && bannerKanan) {
+            closeBtn.onclick = function() {
+                bannerKanan.classList.remove('animate-swipe-in');
+                bannerKanan.classList.add('animate-swipe-out');
+                setTimeout(() => {
+                    bannerKanan.remove();
+                }, 800);
+            };
+        }
+    });
+</script>
+</head>
+<body class="bg-center bg-[black] text-white font-sans bg-cover">
+    
+    <nav class="bg-purple-900">
+    <div class="flex items-center justify-between px-8 py-4">
+        <h1 class="text-3xl font-bold">Dostoyevsky</h1>
+        <ul class="flex gap-10 text-xl">
+            <li>
+                <a href="#home" class="relative text-white after:absolute after:left-0 after:bottom-[-6px] after:w-full after:h-[3px] after:bg-[white] after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left font-normal hover:font-bold cursor-pointer">Home</a>
+            </li>
+            <li>
+                <a href="#about" class="relative text-white after:absolute after:left-0 after:bottom-[-6px] after:w-full after:h-[3px] after:bg-[white] after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left font-normal hover:font-bold cursor-pointer">About</a>
+            </li>
+            <li>
+                <a href="#gallery" class="relative text-white after:absolute after:left-0 after:bottom-[-6px] after:w-full after:h-[3px] after:bg-[white] after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left font-normal hover:font-bold cursor-pointer">Gallery</a>
+            </li>
+            <li>
+                <a href="#performance" class="relative text-white after:absolute after:left-0 after:bottom-[-6px] after:w-full after:h-[3px] after:bg-[white] after:rounded after:scale-x-0 after:origin-right after:transition-transform after:duration-500 hover:after:scale-x-100 hover:after:origin-left font-normal hover:font-bold cursor-pointer">Performance</a>
+            </li>
+        </ul>
+        <a href="tempura.html" target="_blank" rel="noopener noreferrer">
+            <img src="https://emojicdn.elk.sh/🍙" alt="icon" class="w-10 h-10 cursor-pointer active:scale-90 transition-transform duration-300" />
+        </a>
+    </div>
+    <div class="h-1 bg-purple-300 w-full"></div>
+</nav>
+
+<div class="flex flex-col items-center justify-center min-h-screen px-4 md:px-10 py-8 md:py-12 gap-8 md:gap-10 bg-gradient-to-br from-black via-gray-900 to-red-900" id="home">
+    <div class="flex flex-col items-center">
+        <img src="profile3.jpg" alt="Profile" class="rounded-full w-40 h-40 md:w-60 md:h-60 object-cover bg-red-500 mx-auto mt-6 hover:animate-profile-pulse">
+        <h2 class="text-2xl md:text-3xl font-bold mt-6">Erick Liebert</h2>
+        <p class="text-lg md:text-xl">XI PPLG 3</p>
+        <p class="italic text-base md:text-lg text-purple-200 mt-2 text-center">"Agar kau merasa bersalah, Seumur hidupmu."</p>
+    </div>
+
+    <div id="home" class="max-w-2xl w-full text-left mt-8 md:mt-12 bg-gradient-to-br from-gray-900 via-black to-red-700 rounded-xl py-6 md:py-10 px-4">
+        <h1 class="text-2xl md:text-4xl font-bold mb-4 animate-swipe-in">Hello! I'm Erick</h1>
+        <p class="text-sm md:text-base leading-relaxed animate-swipe-in">
+            Perkenalkan saya Riksha, biasa dipanggil erick, seorang siswa kelas XI PPLG 3. Saya memiliki minat dalam pengembangan web dan desain antarmuka pengguna, Selain itu, saya juga suka menulis buku dan bermain alat musik. Saya membuat website ini untuk menampilkan profil, sosial media, dan karya-karya yang telah saya buat.
+            <br><br>
+            website ini menggunakan Tailwind CSS untuk memberikan tampilan yang modern dan responsif. Dengan desain yang sederhana namun menarik, saya berharap website ini dapat mencerminkan kepribadian saya yang kreatif dan inovatif.
+        </p>
+        <br>
+        <p class="text-sm md:text-base leading-relaxed animate-swipe-in">
+            ini adalah website personal pertama saya, jadi mohon maaf jika ada kekurangan. Saya akan terus mengembangkan dan memperbaiki website ini seiring waktu. Terima kasih telah mengunjungi website saya!
+        </p>
+    </div>
+
+    <div id="about" class="max-w-2xl w-full text-center mt-16 md:mt-24 bg-gradient-to-br from-gray-900 via-black to-red-700 rounded-xl py-6 md:py-10 px-2 md:px-4">
+        <h1 class="text-2xl md:text-4xl font-bold mb-4">Tentang Dostoyevsky</h1>
+        <p class="text-sm md:text-base leading-relaxed animate-swipe-in">
+            Luvikuyo adalah website personal yang dibuat untuk menampilkan profil, sosial media, dan karya. Website ini menggunakan Tailwind CSS agar tampilannya modern dan responsif.</p>
+            <br><br>
+            <p class="text-sm md:text-base leading-relaxed animate-swipe-in">
+            pemilik website ini adalah Erick Liebert, seorang siswa kelas XI PPLG 3. Ia memiliki minat dalam pengembangan web dan desain antarmuka pengguna.</p>
+            <br><br>
+            <p class="text-sm md:text-base leading-relaxed animate-swipe-in">
+            Website ini bertujuan untuk memperkenalkan dirinya kepada dunia, menampilkan karya-karya yang telah dibuat, dan menyediakan informasi kontak untuk kolaborasi.
+            </p><br><br>
+            <p class="text-sm md:text-base leading-relaxed animate-swipe-in">
+            Dengan desain yang sederhana namun menarik, Dostoyevsky mencerminkan kepribadian pemiliknya yang kreatif dan inovatif.</p>
+            <br><br>
+            <p class="text-sm md:text-base leading-relaxed animate-swipe-in">
+            Silakan hubungi saya melalui Instagram atau Github di bawah jika ingin berkolaborasi!
+        </p>
+    </div>
+</div>
+
+<div class="space-y-6 max-w-md mx-auto mt-10">
+    <div>
+        <div class="text-lg font-semibold mb-2 text-white">Back-End</div>
+        <div class="w-full bg-gray-700 rounded-full h-6 flex items-center">
+            <div class="bg-red-500 h-6 rounded-full flex items-center justify-end" style="width: 50%;">
+                <span class="text-white text-sm font-bold pr-3">50%</span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="text-lg font-semibold mb-2 text-white">Front-End</div>
+        <div class="w-full bg-gray-700 rounded-full h-6 flex items-center">
+            <div class="bg-blue-500 h-6 rounded-full flex items-center justify-end" style="width: 20%;">
+                <span class="text-white text-sm font-bold pr-3">20%</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="gallery" class="max-w-4xl w-full mx-auto mt-24 text-center bg-gradient-to-br from-red-900 via-black to-gray-800 rounded-xl py-10 px-2 md:px-4">
+    <h1 class="text-2xl md:text-4xl font-bold mb-6">Gallery</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+        <div class="bg-gray-800 rounded-lg p-4 shadow-lg">
+            <img src="kiki.jpg" alt="Gallery 1" class="rounded-lg mb-4 w-full h-40 md:h-48 object-cover animate-swipe-in">
+            <p class="text-white font-semibold animate-swipe-in">me when kiki</p>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-4 shadow-lg">
+            <img src="niko.jpg" alt="Gallery 2" class="rounded-lg mb-4 w-full h-40 md:h-48 object-cover animate-swipe-in">
+            <p class="text-white font-semibold animate-swipe-in">me when niecco</p>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-4 shadow-lg">
+            <img src="postud.jpg" alt="Gallery 3" class="rounded-lg mb-4 w-full h-40 md:h-48 object-cover animate-swipe-in">
+            <p class="text-white font-semibold animate-swipe-in">me with my classmate</p>
+        </div>
+    </div>
+</div>
+<br><br><br><br>
+
+<div id="performance" class="max-w-2xl mx-auto mt-24 bg-gradient-to-br from-gray-900 via-black to-purple-700 rounded-xl py-10 px-4 text-center">
+    <h1 class="text-4xl font-bold mb-6">Performance & Achievements</h1>
+    <div class="space-y-8">
+        <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
+            <h3 class="text-2xl font-semibold mb-2">Project Completion</h3>
+            <div class="w-full bg-gray-700 rounded-full h-6 flex items-center mb-2">
+                <div class="bg-green-500 h-6 rounded-full flex items-center justify-end" style="width: 80%;">
+                    <span class="text-white text-sm font-bold pr-3">80%</span>
+                </div>
+            </div>
+            <p class="text-gray-300">Sudah menyelesaikan 8 dari 10 project tahun ini.</p>
+        </div>
+        <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
+            <h3 class="text-2xl font-semibold mb-2">Skill Progress</h3>
+            <ul class="list-disc list-inside text-gray-300">
+                <li>Front-End: React, Tailwind CSS</li>
+                <li>Back-End: Node.js, Express</li>
+                <li>UI/UX Design: Figma, Canva</li>
+            </ul>
+        </div>
+        <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
+            <h3 class="text-2xl font-semibold mb-2">Awards & Certificates</h3>
+            <ul class="list-disc list-inside text-gray-300">
+                <li>Juara 3 Pidato Tingkat Kecamatan</li>
+                <li>Juara 3 Kaligrafi</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br><br><br><br>
+
+<div class="text-center mb-2">
+    <span class="text-gray-900 text-3xl font-bold">Contact Us</span>
+</div>
+<div class="flex flex-col md:flex-row items-center px-4 md:px-10 py-6 gap-4 text-lg md:text-2xl justify-center">
+    <a href="https://instagram.com/erick.liebert" target="_blank" rel="noopener noreferrer">
+        <img src="https://buatlogoonline.com/wp-content/uploads/2022/10/Logo-Instagram-Transparan.png" alt="Instagram" class="w-8 h-8 object-contain" />
+    </a>
+    <span class="text-white font-bold">@erick.liebert</span>
+    <a href="https://github.com/erickliebert" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="Github" class="w-8 h-8 object-contain md:ml-6" />
+    </a>
+    <span class="text-white font-bold">@erickliebert</span>
+</div>
+
+<div id="banner-kanan" class="fixed bottom-0 right-0 mb-8 bg-purple-500 text-white px-6 py-4 rounded-l-xl shadow-lg flex items-center gap-3 z-50">
+    <img src="https://emojicdn.elk.sh/🍙" alt="Banner" class="w-10 h-10" />
+    <span class="font-bold text-lg animate-swipe-in">
+        Selamat Datang di Dostoyevsky!
+    </span>
+    <button id="close-banner" class="ml-4 text-white text-xl font-bold px-2 rounded hover:bg-purple-700 transition-colors">&times;</button>
+</div>
+
+<div class="text-center mt-10">
+    <p class="text-gray-500 text-sm">© 2023 Erick Liebert. All rights reserved.</p>
+</body>
+</html>
